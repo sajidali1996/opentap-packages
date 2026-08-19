@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package InfoLink="http://www.keysight.com/find/TAP" Date="06/26/2026 10:58:25" Name="WPF Controls" Version="9.34.0+e9a555cf" Architecture="AnyCPU" OS="Windows, Linux, MacOS" xmlns="http://opentap.io/schemas/package">
+  <Hash>BT8A6DkqYE6mryOtOKHSvV6TGPQ</Hash>
+  <Description>This package contains a number of common WPF GUI components and settings used by the different plugins and tools (e.g. Editor, Results Viewer and Timing Analyzer).
+    <Status>Released</Status><Organisation>Keysight Technologies</Organisation></Description>
+  <Dependencies>
+    <PackageDependency Package="OpenTAP" Version="^9.34.0+f498d3b6" />
+    <PackageDependency Package="Expressions" Version="^1.7.1+e0dbf00d" />
+    <PackageDependency Package="Keysight Licensing" Version="^1.7.3+e34d259f" />
+  </Dependencies>
+  <Owner>Keysight Technologies, Inc.</Owner>
+  <Files>
+    <File Path="Packages/WPF Controls/Keysight.OpenTap.Wpf.dll">
+      <Plugins>
+        <Plugin Type="OpenTap.KeysightVisaDeviceDiscovery" BaseType="Device Discovery">
+          <Name>KeysightVisaDeviceDiscovery</Name>
+          <Order>-10000</Order>
+          <Browsable>False</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.ThreadBreakAnnotator" BaseType="IAnnotator">
+          <Name>ThreadBreakAnnotator</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.CheckForUpdatesCliAction" BaseType="ICliAction">
+          <Name>check-for-updates</Name>
+          <Order>-10000</Order>
+          <Browsable>False</Browsable>
+          <Description>Enables or disables checking for updates.</Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.AvailableValuesControlProvider" BaseType="Control Provider">
+          <Name>AvailableValuesControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>False</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.BoolControlProvider" BaseType="Control Provider">
+          <Name>BoolControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>False</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.CollectionControlProvider" BaseType="Control Provider">
+          <Name>CollectionControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.FilePathControlProvider" BaseType="Control Provider">
+          <Name>FilePathControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>False</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.MethodControlProvider" BaseType="Control Provider">
+          <Name>MethodControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.MultiSelectProvider" BaseType="Control Provider">
+          <Name>MultiSelectProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.PictureControlProvider" BaseType="Control Provider">
+          <Name>PictureControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>False</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.SimpleControlProvider" BaseType="Control Provider">
+          <Name>SimpleControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.GuiControlsSettings" BaseType="Component Settings">
+          <Name>GUI Controls</Name>
+          <Order>-10000</Order>
+          <Browsable>False</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.GuiMenuModelFactory" BaseType="IMenuModelFactory">
+          <Name>GuiMenuModelFactory</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.EditorSettings" BaseType="Component Settings">
+          <Name>Editor</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description>Editor Settings</Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.NotifyingResultListener" BaseType="Result Listener">
+          <Name>Notifying Result Listener</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description>Windows specific notifying result listener. It is capable of playing sounds and blinking the application main window.</Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.Themes.WindowsThemeApi" BaseType="ThemeApi">
+          <Name>WindowsThemeApi</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.ControlProviders.EnabledControlProvider" BaseType="Control Provider">
+          <Name>EnabledControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>False</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.ControlProviders.PasswordControlProvider" BaseType="Control Provider">
+          <Name>PasswordControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.ControlProviders.VerdictControlProvider" BaseType="Control Provider">
+          <Name>VerdictControlProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Wpf.LinkLauncher+FallbackLauncher" BaseType="ILinkLauncher">
+          <Name>FallbackLauncher</Name>
+          <Order>-10000</Order>
+          <Browsable>True</Browsable>
+          <Description></Description>
+          <Collapsed>False</Collapsed>
+          <Groups />
+        </Plugin>
+      </Plugins>
+      <IgnoreDependency>Keysight.Ftl.Licensing.Api</IgnoreDependency>
+      <IgnoreDependency>EnvDTE</IgnoreDependency>
+      <Hash>83E5267FD36649F897353104DBD01EC1601A94D2</Hash>
+    </File>
+    <File Path="Dependencies/Keysight.Ccl.Wsl.6.6.0.0/Keysight.Ccl.Wsl.dll">
+      <Hash>5E0166D374F8F0F47E98B74CA168409D3AADCD58</Hash>
+    </File>
+    <File Path="Dependencies/MahApps.Metro.1.3.0.0/MahApps.Metro.dll">
+      <Hash>01C30F77D3F8F2983483AECC548D06CC1EA9B1CE</Hash>
+    </File>
+    <File Path="Dependencies/Microsoft.Xaml.Behaviors.1.1.0.0/Microsoft.Xaml.Behaviors.dll">
+      <Hash>600110ACCC696CA425B12B3FD01FA2BB9B26C230</Hash>
+    </File>
+    <File Path="Dependencies/System.Windows.Interactivity.4.5.0.0/System.Windows.Interactivity.dll">
+      <Hash>CE6C4C18CF638F980905B9CB6710EE1FA73BB397</Hash>
+    </File>
+  </Files>
+</Package>

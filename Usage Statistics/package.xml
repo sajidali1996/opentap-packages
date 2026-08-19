@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package InfoLink="" Date="01/22/2026 09:54:12" Name="Usage Statistics" Version="1.2.0+94a9832f" Architecture="AnyCPU" OS="Windows,Linux,Macos" xmlns="http://opentap.io/schemas/package">
+  <Hash>wceiF3g7S-TceICBxCBhkxWHsLY</Hash>
+  <Description>OpenTAP Usage Statistics.</Description>
+  <Dependencies>
+    <PackageDependency Package="OpenTAP" Version="^9.20.4+c2191172" />
+    <PackageDependency Package="Keysight Licensing" Version="^1.4.2+8a01b531" />
+  </Dependencies>
+  <Files>
+    <File Path="Packages/Usage Statistics/Keysight.OpenTap.Plugins.UsageStatisticsCollector.dll">
+      <Plugins>
+        <Plugin Type="Keysight.OpenTap.Plugins.UsageStatisticsCollector.UsageStatisticsResultListener" BaseType="Result Listener">
+          <Name>Usage Statistic Collector</Name>
+          <Order>-10000</Order>
+          <Browsable>false</Browsable>
+          <Description>Collects usage statistic</Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="Keysight.OpenTap.Plugins.UsageStatisticsCollector.UsageStatisticsRunMonitor" BaseType="Component Settings | ITestPlanRunMonitor">
+          <Name>UsageStatisticsRunMonitor</Name>
+          <Order>-10000</Order>
+          <Browsable>false</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+      </Plugins>
+      <Hash>7F906C8ADFF0AF23ECC1A372DD056036843EA710</Hash>
+    </File>
+  </Files>
+</Package>

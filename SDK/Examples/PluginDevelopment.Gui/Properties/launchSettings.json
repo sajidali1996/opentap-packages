@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WPF Editor": {
+      "commandName": "Executable",
+      "executablePath": "./editor.exe"
+    }
+  }
+}

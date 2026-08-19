@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package Name="PythonExamples" OS="Windows,Linux,MacOS" Date="03/16/2026 15:20:23" Version="3.2.1+135d85ed" Architecture="AnyCPU" xmlns="http://opentap.io/schemas/package">
+  <Hash>WMbUtDcFkYCM630mwboKQLsI7Xo</Hash>
+  <Dependencies>
+    <PackageDependency Package="OpenTAP" Version="^9.18.2" />
+    <PackageDependency Package="Python" Version="^3.2.1+135d85ed" />
+  </Dependencies>
+  <Owner>Keysight Technologies, Inc.</Owner>
+  <SourceUrl>https://github.com/opentap/OpenTap.Python</SourceUrl>
+  <Files>
+    <File Path="Packages/PythonExamples/BasicFunctionality.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.BasicSettings.BasicSettings" BaseType="Component Settings">
+          <Name>Example Settings</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>A basic example of how to define settings.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+      </Plugins>
+      <Hash>E7D4040CC5F48D91015E6222B3ACEA9923EBC88A</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/BasicInstrument.py">
+      <Hash>91384CBE9D11A90CA9C9AEAC859B7B1507623A55</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/BasicScpiInstrument.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.BasicScpiInstrument.BasicScpiInstrument" BaseType="Instrument">
+          <Name>Basic SCPI Instrument</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>A basic example of a SCPI instrument driver.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>DD88D818BA3D2A7A857179A7F3BC3E696F62E470</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/CliAction.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.CliAction.CliAction2" BaseType="">
+          <Name>test-cli</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>A basic example of an OpenTap Cli action. write ./tap pythonexample test-cli</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>pythonexample</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>79AE71E5737DE02CF8C57C534B1BB6E333A8BF5A</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/HiddenDut.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.HiddenDut.HiddenDut" BaseType="Dut">
+          <Name>HiddenDut</Name>
+          <Order>-10000</Order>
+          <Browsable>false</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+      </Plugins>
+      <Hash>960D0C8F450A237F1C22A159CD382595E952650B</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/OutputInput.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.OutputInput.OutputStep" BaseType="Test Step">
+          <Name>Test Step Output</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>An example of using outputs to share data with other test steps.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="PythonExamples.OutputInput.InputStep" BaseType="Test Step">
+          <Name>Test Step Input</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>An example of using data shared from an output step as an input.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>A37B55F7DF696BD4346E1D0DB4FEF8151FC31060</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/__init__.py">
+      <Hash>524F9445CC79DDB8651BAE9A6EADE45B788436CE</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/DischargeStep.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.DischargeStep.DischargeStep" BaseType="Test Step">
+          <Name>Discharge</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Simulated scenario of discharging a battery while a power analyzer is measuring the voltage curve.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+            <String>Battery Test</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>ACB5EDA7182289CEF1DDD0944E982DDEC8A7B50D</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/BasicDut.py">
+      <Hash>5F3FD56433E9F325A55E379B09DBC168FDCE06C6</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/MenuItem.py">
+      <Hash>9810D50579454D49D69AAE1C94B96ED009724314</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/BasicSettings.py">
+      <Hash>68D6553F07405E3C62CC57D00436527360DD1C86</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/ChargeStep.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.ChargeStep.ChargeStep" BaseType="Test Step">
+          <Name>Charge</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Simulated scenario of an emulated power analyzer charging a battery and measuring the voltage curve.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+            <String>Battery Test</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>48D0E9C88FB3730160A592B3E3E3DD62526D761E</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/UserInputExample.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.UserInputExample.BasicUserInput" BaseType="">
+          <Name>BasicUserInput</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="PythonExamples.UserInputExample.BasicUserInputStep" BaseType="Test Step">
+          <Name>Basic User Input Step</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>An example of asking for user input.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>4373312E8A876F2EC7B5BAE51C15C5C1D6410269</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/EnumUsage.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.EnumUsage.EnumUsage" BaseType="Test Step">
+          <Name>Enum Usage</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>An example of how to use enums.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>975228E8AF9EEE49CC26260279A1E0F4412E156F</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/NumpyStep.py">
+      <Hash>4DC41AF2582229611B51529410C7569D193B4251</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/SamplingStepBase.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.PowerAnalyzer.PowerAnalyzer" BaseType="Instrument">
+          <Name>Power Analyzer</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Simulated power analyzer instrument used for charge/discharge demo steps written in python.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>5825D096D4C65951CD9D9B10D678121383472AC9</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/CsvResultListener.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.CsvResultListener.CsvPythonResultListener" BaseType="Result Listener">
+          <Name>CSV ResultListener</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>An example of a ResultListener.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>13936C20CDB9030691664BDB1B520275C1956DAB</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/LockManager.py">
+      <Hash>FC5622DD0C98A5B34FCF336BC85DD23611D34994</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/ErrorExample.py">
+      <Plugins>
+        <Plugin Type="PythonExamples.ErrorExample.ErrorExample" BaseType="Test Step">
+          <Name>Error Handling</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>An example of a step that throws and handles an error.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Python Example</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <Hash>78AB822F2AAED3705104A535FA8164C3446B2BC2</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/PowerAnalyzer.py">
+      <Hash>229FDFC175B119FCBACC0B69F94FB06942B1248A</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/LICENSE.txt">
+      <Hash>90DE7D43D7D1534DB5141037CE939E6328E5C318</Hash>
+    </File>
+    <File Path="Packages/PythonExamples/requirements.txt">
+      <PythonRequirements></PythonRequirements>
+      <Hash>3F87637CF2B3F7873F94E8EED7E8577844B16121</Hash>
+    </File>
+  </Files>
+  <License>Apache-2.0</License>
+  <Description>This package is an example of how to create a plugin from python code. Feel free to use the python code included here as a basis for a new plugin.</Description>
+</Package>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package Date="03/16/2026 15:20:21" Name="Python" Version="3.2.1+135d85ed" Architecture="AnyCPU" OS="Windows,Linux,MacOS" xmlns="http://opentap.io/schemas/package">
+  <Hash>IDCdh8P7wRPefC6zzpwOpBwMzqw</Hash>
+  <Description>OpenTAP Python plugin. This plugin includes all tools, and documentation to develop OpenTAP plugins using Python.
+        <Links><Link Name="Source Code" Description="Go to the source code repository." Url="https://github.com/OpenTAP/OpenTap.Python" /><Link Name="Documentation" Description="Go to the documentation." Url="https://doc.opentap.io/OpenTap.Python/" /></Links><Contacts> tap.support@keysight.com </Contacts><Prerequisites> Python (&gt;=3.7) </Prerequisites></Description>
+  <Dependencies>
+    <PackageDependency Package="OpenTAP" Version="^9.18.3+fc9e60e0" />
+  </Dependencies>
+  <Owner>Keysight Technologies, Inc.</Owner>
+  <SourceUrl>https://github.com/OpenTAP/OpenTap.Python</SourceUrl>
+  <Files>
+    <File Path="Packages/Python/OpenTap.Python.dll">
+      <Plugins>
+        <Plugin Type="OpenTap.Python.PyObjectAnnotator" BaseType="IAnnotator">
+          <Name>PyObjectAnnotator</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Python.ProjectFile" BaseType="ICustomPackageData">
+          <Name>ProjectFile</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Python.PyObjectSerializer" BaseType="Serializer">
+          <Name>PyObjectSerializer</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Python.PythonInstallAction" BaseType="ICustomPackageAction">
+          <Name>PythonInstallAction</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Python.PythonInstallRequirementsCliAction" BaseType="ICliAction">
+          <Name>install-requirements</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Install package requirements defined by installed packages</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="OpenTap.Python.PythonPackageBuildAction" BaseType="ICustomPackageAction">
+          <Name>PythonPackageBuildAction</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Python.PythonPluginProvider" BaseType="TypeData Provider">
+          <Name>PythonPluginProvider</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Python.PythonRequirements" BaseType="ICustomPackageData">
+          <Name>PythonRequirements</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Python.PythonSettings" BaseType="Component Settings">
+          <Name>Python</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Settings for the Python plugin.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Python.SDK.PythonGetPath" BaseType="ICliAction">
+          <Name>get-path</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Get the path to the Python library. (Windows only)</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="OpenTap.Python.SDK.PythonSearchPath" BaseType="ICliAction">
+          <Name>search-path</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>A list containing the additional search paths for finding the Python based plugin modules.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="OpenTap.Python.SDK.PythonSetLibPath" BaseType="ICliAction">
+          <Name>set-lib-path</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Set the path to the python installation or virtual environment.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="OpenTap.Python.SDK.PythonSetPath" BaseType="ICliAction">
+          <Name>set-path</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Set the path to the python installation.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="OpenTap.Python.SDK.SetVirtualEnvironmentAction" BaseType="ICliAction">
+          <Name>set-virtual-environment</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Set the virtual environment setting.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="OpenTap.Python.SDK.UpdateStubsAction" BaseType="ICliAction">
+          <Name>build-stubs</Name>
+          <Order>-10000</Order>
+          <Browsable>false</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="OpenTap.Python.CliActions.NewProject" BaseType="ICliAction">
+          <Name>new-project</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Starts a new OpenTAP/Python project.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+        <Plugin Type="OpenTap.Python.CliActions.PackTemplateProject" BaseType="ICliAction">
+          <Name>pack-template-project</Name>
+          <Order>-10000</Order>
+          <Browsable>false</Browsable>
+          <Description>Pack the project templates into a zip file. This is only used when the python project itself is being built.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>python</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <IgnoreDependency>Microsoft.CSharp</IgnoreDependency>
+      <IgnoreDependency>System.Collections.Concurrent</IgnoreDependency>
+      <IgnoreDependency>System.IO.FileSystem.Primitives</IgnoreDependency>
+      <IgnoreDependency>System.Linq</IgnoreDependency>
+      <IgnoreDependency>System.Linq.Expressions</IgnoreDependency>
+      <IgnoreDependency>System.ObjectModel</IgnoreDependency>
+      <IgnoreDependency>System.Reflection.Emit</IgnoreDependency>
+      <IgnoreDependency>System.Reflection.Emit.ILGeneration</IgnoreDependency>
+      <IgnoreDependency>System.Reflection.Emit.LightWeight</IgnoreDependency>
+      <IgnoreDependency>System.Security.Cryptography.Primitives</IgnoreDependency>
+      <IgnoreDependency>System.Text.RegularExpressions</IgnoreDependency>
+      <IgnoreDependency>System.Threading</IgnoreDependency>
+      <IgnoreDependency>System.Threading.Task.Extensions</IgnoreDependency>
+      <IgnoreDependency>System.Threading.Task.Parallel</IgnoreDependency>
+      <IgnoreDependency>System.Xml.ReaderWriter</IgnoreDependency>
+      <IgnoreDependency>System.Xml.XDocument</IgnoreDependency>
+      <IgnoreDependency>netstandard2.0</IgnoreDependency>
+      <Hash>EFFB64B5C75894D2E5A6B7196EC7B7DBDF415A25</Hash>
+    </File>
+    <File Path="Packages/Python/opentap.py">
+      <Hash>6EC83457D8F8C8D012CAE3A3A2F420252B2136C1</Hash>
+    </File>
+    <File Path="Packages/Python/OpenTap.Python.ProjectTemplate.zip">
+      <Hash>40C81EAC056A4708C4A5644E8FC01965CC147415</Hash>
+    </File>
+    <File Path="Packages/Python/Readme.md">
+      <Hash>8B8D644A0BE8366E490EB6D6A6513613017C3FF7</Hash>
+    </File>
+    <File Path="Packages/Python/icon.png">
+      <PackageIcon></PackageIcon>
+      <Hash>03ED25EEB1BD83783ABACB7531436834051B397B</Hash>
+    </File>
+    <File Path="Dependencies/Python.Runtime.3.0.5.0/Python.Runtime.dll">
+      <Hash>8E4CE4262A1D59D6A704EFD69B0FCE8F47A1AADB</Hash>
+    </File>
+  </Files>
+</Package>

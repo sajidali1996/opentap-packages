@@ -1,0 +1,44 @@
+<Project>
+	<PropertyGroup Condition="'$(OS)'=='Windows_NT' AND '$(Configuration)'==''">
+		<Configuration>Debug</Configuration>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(OS)'=='Unix' AND '$(Configuration)'==''">
+		<Configuration>LinuxDebug</Configuration>
+	</PropertyGroup>
+	
+		
+	<PropertyGroup>
+		<!-- Ensure that all projects in this solution use the same version of OpenTAP -->		
+		<OpenTapVersion>9.34.0</OpenTapVersion>
+		<TargetFramework>net9</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<OutputPath>$(MSBuildThisFileDirectory)bin\$(Configuration)\</OutputPath>
+        <PlatformTarget>x64</PlatformTarget>
+	</PropertyGroup>
+	
+	<!-- To support building on linux, it is needed to disable some things, like installing Developers System. -->
+	<PropertyGroup Condition="'$(OS)'=='Unix'">
+		<IsLinux>True</IsLinux>
+		<IsWindows>False</IsWindows>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(OS)'=='Windows_NT'">
+		<IsLinux>False</IsLinux>
+		<IsWindows>True</IsWindows>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<DevelopersSystem Condition="'$(Configuration)' == 'Debug CE'">Editor X</DevelopersSystem>
+		<DevelopersSystem Condition="'$(Configuration)' != 'Debug CE'">Developer's System</DevelopersSystem>
+	</PropertyGroup>
+
+  <!-- We need to override the default runtimeconfig used by OpenTAP because it cannot otherwise resolve some Windows Desktop references -->
+  <ItemGroup Condition="'$(IsWindows)'=='True'">
+    <Content Include="$(MSBuildThisFileDirectory)Custom.runtimeconfig.json">
+      <Link>tap.runtimeconfig.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package Date="06/26/2026 08:36:45" Name="Expressions" Version="1.7.1+e0dbf00d" Architecture="AnyCPU" OS="Windows,Linux,Macos" xmlns="http://opentap.io/schemas/package">
+  <Hash>xRG_tf2JMlV3FWi0MEvRxzd_ZVA</Hash>
+  <Description>The Expressions package adds support for expressions and number and text mixins for test steps.
+  
+    Expressions can be simple calculations for number-types or string manipulations for string-types.
+
+    <Links><Link Description="Link to the expressions section in the OpenTAP documentation." Name="Documentation" Url="https://doc.opentap.io/Developer%20Guide/Test%20Step/#Expressions" /></Links></Description>
+  <Dependencies>
+    <PackageDependency Package="OpenTAP" Version="^9.22.1+9447a2af" />
+  </Dependencies>
+  <Owner>OpenTAP</Owner>
+  <SourceUrl>https://github.com/opentap/expressions</SourceUrl>
+  <SourceLicense>Apache-2.0</SourceLicense>
+  <Files>
+    <File Path="Packages/Expressions/OpenTap.Expressions.dll">
+      <Plugins>
+        <Plugin Type="OpenTap.NumberMixinBuilder" BaseType="IMixinBuilder">
+          <Name>Number</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Adds a number to an object.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.BooleanMixinBuilder" BaseType="IMixinBuilder">
+          <Name>Boolean</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Adds a boolean (true/false) setting to an object.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.TextMixinBuilder" BaseType="IMixinBuilder">
+          <Name>Text</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description />
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Expressions.ExpressionAnnotator" BaseType="IAnnotator">
+          <Name>ExpressionAnnotator</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Expressions.ExpressionEvaluationMixin" BaseType="IMixin">
+          <Name>ExpressionEvaluationMixin</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Expressions.ExpressionMenuModelFactory" BaseType="IMenuModelFactory">
+          <Name>ExpressionMenuModelFactory</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Expressions.RemoveOtherMenuModelsAnnotator" BaseType="IAnnotator">
+          <Name>RemoveOtherMenuModelsAnnotator</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description></Description>
+          <Collapsed>false</Collapsed>
+          <Groups />
+        </Plugin>
+        <Plugin Type="OpenTap.Expressions.Steps.ConditionStep" BaseType="Test Step">
+          <Name>If Condition</Name>
+          <Order>-10000</Order>
+          <Browsable>true</Browsable>
+          <Description>Conditionally execute child steps based on an expression.</Description>
+          <Collapsed>false</Collapsed>
+          <Groups>
+            <String>Flow Control</String>
+          </Groups>
+        </Plugin>
+      </Plugins>
+      <IgnoreDependency>netstandard</IgnoreDependency>
+      <Hash>1068A287059397C82A76F75B6A69A6E2C2099C72</Hash>
+    </File>
+  </Files>
+</Package>
