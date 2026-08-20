@@ -203,6 +203,28 @@ class Inverter(Dut):
         self.last_command_time = datetime.utcnow().isoformat()
         return command
 
+    def send_inverter_command(self, key, value):
+        key_text = str(key).strip()
+        if not key_text:
+            raise ValueError("Command key cannot be empty")
+        return self._send_command(json.dumps({key_text: value}))
+
+    def apply_masking(self, masking_functions):
+        if masking_functions is None:
+            raise ValueError("Masking functions cannot be empty")
+
+        selected = []
+        for item in masking_functions:
+            text = str(item).strip()
+            if text:
+                selected.append(text)
+
+        if not selected:
+            raise ValueError("Masking functions cannot be empty")
+
+        payload = {"cmdType": "JetMaskingFunctionArray", "maskingFunctions": selected}
+        return self._send_command(json.dumps(payload, separators=(",", ":")))
+
     def control_on(self): return self._send_command("control_on")
     def control_off(self): return self._send_command("control_off")
     def inverter_reset(self): return self._send_command("inverter_reset")

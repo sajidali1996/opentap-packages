@@ -11,6 +11,8 @@ import time
 import OpenTap
 from opentap import TestStep, attribute, property
 from System import Boolean, Double, String
+from System.Collections.Generic import List
+from System.ComponentModel import Browsable
 
 from .common import log_error, log_info, log_warning
 from .inverter_dut import Inverter
@@ -71,6 +73,222 @@ def _to_bool(value):
         if text == "false":
             return False
     return None
+
+
+def _parse_command_value(text):
+    raw = str(text).strip()
+    if raw == "":
+        raise RuntimeError("Value cannot be empty")
+    try:
+        return json.loads(raw)
+    except Exception:
+        lowered = raw.lower()
+        if lowered == "true":
+            return True
+        if lowered == "false":
+            return False
+        if lowered == "null":
+            return None
+        return raw
+
+
+_INVERTER_COMMAND_KEYS = [
+    "pfset",
+    "voltageSuppLimit",
+    "gridOvLimit",
+    "gridUvLimit",
+    "ovrTime",
+    "uvrTime",
+    "gridOfLimit",
+    "gridUfLimit",
+    "ofrTime",
+    "ufrTime",
+    "rOfr",
+    "reconnectBlockTimer",
+    "fFQLimit",
+    "fFQSlope",
+    "pvConvStatus",
+    "batConvStatus",
+    "inverter_config_screen",
+    "prefVpp",
+]
+
+
+def _build_inverter_command_key_choices():
+    choices = List[String]()
+    for key in _INVERTER_COMMAND_KEYS:
+        choices.Add(key)
+    return choices
+
+
+_MASKING_FUNCTIONS = [
+    "ovr",
+    "uvr",
+    "ofr",
+    "ufr",
+    "passiveIslandDetection",
+    "activeIslandDetection",
+    "frequencyFeedback",
+    "stepInjection",
+    "forcedStandbyState",
+    "forcedNormalState",
+    "reversePowerProtection",
+    "powerFactorSwitching",
+    "voltageRiseSuppression",
+    "bypassCtTest",
+]
+
+
+def _build_masking_function_choices():
+    choices = List[String]()
+    for name in _MASKING_FUNCTIONS:
+        choices.Add(name)
+    return choices
+
+
+def _notify_property_changed(obj, property_name):
+    callback = getattr(obj, "OnPropertyChanged", None)
+    if callable(callback):
+        callback(property_name)
+
+
+_VERIFY_PAYLOAD_KEYS = [
+    "alerts",
+    "alertsList",
+    "Amb Temperature",
+    "bat",
+    "bat_available?",
+    "bat_relay",
+    "Battery Temperature",
+    "batteryChargedToday",
+    "batteryContribution",
+    "batteryDischargedToday",
+    "batteryState",
+    "bms_bypass",
+    "bms_comm",
+    "CM4 Temperature",
+    "cm4_v",
+    "control_status",
+    "dailyAcOutputYield",
+    "dailyFeedinEnergy",
+    "dailyPurchaseEnergy",
+    "dailyPvYield",
+    "designCapacity",
+    "disconnecting_TechApp",
+    "dsp_v",
+    "dspAlertBitfield1",
+    "dspAlertBitfield2",
+    "dspControlStatusBitfield",
+    "dspFaultBitfield1",
+    "dspFaultBitfield2",
+    "dspStateMachine",
+    "dspStateMachine1",
+    "dspStateMachine2",
+    "dspStateMachine3",
+    "dspUpTime",
+    "eventTime",
+    "export_status",
+    "fgrid",
+    "fixed_schedule_available",
+    "grid",
+    "grid_relay",
+    "gridContribution",
+    "gridPower",
+    "gridPowerAdjusted",
+    "gridState",
+    "hotspotSsid",
+    "hw_trip",
+    "hwFaultBitField1",
+    "hwFaultBitField2",
+    "hwTripsList",
+    "i_charge_max",
+    "i_discharge_max",
+    "ibat",
+    "igrid1Max",
+    "igrid1Rms",
+    "igrid2Max",
+    "igrid2Rms",
+    "iinv1Dc",
+    "iinv1Max",
+    "iinv1Rms",
+    "iinv2Max",
+    "iinv2Rms",
+    "InternetConnected",
+    "inv_comm",
+    "inv_mode",
+    "Inverter Temperature",
+    "inverter_status",
+    "ipv1",
+    "ipv1Max",
+    "ipv2",
+    "ipv2Max",
+    "ipv3",
+    "ipv3Max",
+    "ipv4",
+    "load_relay",
+    "loadPower",
+    "loadPowerAdjusted",
+    "macAddress",
+    "ntp_time_sync",
+    "pBat",
+    "pBat_Ac",
+    "pgrid1",
+    "pgrid2",
+    "pinv1",
+    "pinv2",
+    "pPv",
+    "pPv_Ac",
+    "pPv1",
+    "pPv2",
+    "pPv3",
+    "pv",
+    "PV Temperature",
+    "pv_available?",
+    "pvContribution",
+    "rackAmount",
+    "rated_capacity",
+    "RcServerConnected",
+    "SeCloudConnected",
+    "SES_feedback_bitfield",
+    "SES_Version",
+    "SimModApp",
+    "sisw_v",
+    "soc",
+    "soh",
+    "stackCurrent",
+    "stackPower",
+    "stackVoltage",
+    "sup_trip",
+    "tripsList",
+    "update_schedule_available",
+    "vbat",
+    "vbus",
+    "vbusC1",
+    "vbusC1Max",
+    "vbusC2",
+    "vbusC2Max",
+    "vbusMax",
+    "vgrid1Rms",
+    "vgrid2Rms",
+    "vinv1Max",
+    "vinv1Rms",
+    "vinv2Max",
+    "vinv2Rms",
+    "vpv1",
+    "vpv1Max",
+    "vpv2",
+    "vpv2Max",
+    "vpv3",
+    "vpv3Max",
+    "vpv4",
+]
+
+
+def _build_payload_key_choices():
+    choices = List[String]()
+    for key in _VERIFY_PAYLOAD_KEYS:
+        choices.Add(key)
+    return choices
 
 
 @attribute(OpenTap.Display("Control On", "Send control_on.", "Inverter Automation\\Commands"))
@@ -206,6 +424,91 @@ class SetLoadFollowingMode(TestStep):
             _run_command(self, "set_load_following_mode")
         except Exception as exc:
             _set_error(self, "set_load_following_mode", exc)
+
+
+@attribute(OpenTap.Display("send Inverter command", "Send one inverter key/value command as JSON.", "Inverter Automation\\Commands"))
+class SendInverterCommand(TestStep):
+    Inverter = property(Inverter, None).add_attribute(OpenTap.Display("Inverter", "Inverter DUT used by this step.", "Resources", 1))
+    AvailableKeys = property(List[String], None).add_attribute(Browsable(False))
+    Key = property(String, "pfset").add_attribute(OpenTap.AvailableValues("AvailableKeys")).add_attribute(OpenTap.Display("Key", "Inverter command key to send.", "Command", 1))
+    Value = property(String, "0.95").add_attribute(OpenTap.Display("Value", "Value to send. Use JSON literal format (e.g. 109, 61.8, true, \"text\").", "Command", 2))
+
+    def __init__(self):
+        super().__init__()
+        self.AvailableKeys = _build_inverter_command_key_choices()
+
+    def Run(self):
+        super().Run()
+        try:
+            dut = _require_dut(self)
+            value = _parse_command_value(self.Value)
+            result = dut.send_inverter_command(self.Key, value)
+            self.PublishResult("Inverter Command", ["Key", "Value", "Command"], [str(self.Key), _to_text(value), str(result)])
+            log_info("send_inverter_command completed: {0}", str(result))
+            self.UpgradeVerdict(OpenTap.Verdict.Pass)
+        except Exception as exc:
+            _set_error(self, "send_inverter_command", exc)
+
+
+@attribute(OpenTap.Display("apply masking", "Send selected masking functions as a combined command.", "Inverter Automation\\Commands"))
+class ApplyMasking(TestStep):
+    Inverter = property(Inverter, None).add_attribute(OpenTap.Display("Inverter", "Inverter DUT used by this step.", "Resources", 1))
+    AvailableMaskingFunctions = property(List[String], None).add_attribute(Browsable(False))
+    SelectedMaskingFunction = property(String, "ovr").add_attribute(OpenTap.AvailableValues("AvailableMaskingFunctions")).add_attribute(OpenTap.Display("Masking function", "Function selected from dropdown to add.", "Masking", 1))
+    MaskingFunctions = property(List[String], None).add_attribute(OpenTap.AvailableValues("AvailableMaskingFunctions")).add_attribute(OpenTap.Display("Selected functions", "Combined masking functions to send.", "Masking", 2))
+
+    def __init__(self):
+        super().__init__()
+        self.AvailableMaskingFunctions = _build_masking_function_choices()
+        self.MaskingFunctions = List[String]()
+
+    @attribute(Browsable(True))
+    @attribute(OpenTap.Display("Add Selected", "Add selected masking function to the combined list.", "Masking", 3))
+    def AddSelected(self):
+        selected = str(self.SelectedMaskingFunction).strip()
+        if selected == "":
+            return
+        if self.MaskingFunctions is None:
+            self.MaskingFunctions = List[String]()
+        if selected in self.MaskingFunctions:
+            log_warning("Masking function '{0}' is already selected", selected)
+            return
+        self.MaskingFunctions.Add(selected)
+        _notify_property_changed(self, "MaskingFunctions")
+        log_info("Added masking function: {0}", selected)
+
+    @attribute(Browsable(True))
+    @attribute(OpenTap.Display("Remove Last Added", "Remove the last masking function from the combined list.", "Masking", 4))
+    def RemoveLastAdded(self):
+        if self.MaskingFunctions is None or self.MaskingFunctions.Count == 0:
+            log_warning("No masking function to remove")
+            return
+        index = self.MaskingFunctions.Count - 1
+        removed = self.MaskingFunctions[index]
+        self.MaskingFunctions.RemoveAt(index)
+        _notify_property_changed(self, "MaskingFunctions")
+        log_info("Removed masking function: {0}", str(removed))
+
+    def Run(self):
+        super().Run()
+        try:
+            dut = _require_dut(self)
+            selected = []
+            if self.MaskingFunctions is not None:
+                for item in self.MaskingFunctions:
+                    text = str(item).strip()
+                    if text:
+                        selected.append(text)
+            if not selected:
+                raise RuntimeError("Add at least one masking function before running")
+
+            result = dut.apply_masking(selected)
+            payload = {"cmdType": "JetMaskingFunctionArray", "maskingFunctions": selected}
+            self.PublishResult("Apply Masking", ["Count", "MaskingFunctions", "Payload", "Command"], [len(selected), json.dumps(selected), json.dumps(payload, separators=(",", ":")), str(result)])
+            log_info("apply_masking completed: {0}", str(result))
+            self.UpgradeVerdict(OpenTap.Verdict.Pass)
+        except Exception as exc:
+            _set_error(self, "apply_masking", exc)
 
 
 @attribute(OpenTap.Display("Read Connection Status", "Read status() from the inverter DUT.", "Inverter Automation\\Diagnostics"))
@@ -361,13 +664,15 @@ class VerifyControlOn(TestStep):
 @attribute(OpenTap.Display("Verify Payload Key", "Assert one payload key against an expected value.", "Inverter Automation\\Verification"))
 class VerifyPayloadKey(TestStep):
     Inverter = property(Inverter, None).add_attribute(OpenTap.Display("Inverter", "Inverter DUT used by this step.", "Resources", 1))
-    Key = property(String, "control_status").add_attribute(OpenTap.Display("Key", "Payload key to verify.", "Verification", 1))
+    AvailableKeys = property(List[String], None).add_attribute(Browsable(False))
+    Key = property(String, "control_status").add_attribute(OpenTap.AvailableValues("AvailableKeys")).add_attribute(OpenTap.Display("Key", "Payload key to verify.", "Verification", 1))
     ExpectedValue = property(String, "true").add_attribute(OpenTap.Display("Expected value", "Expected payload value as text.", "Verification", 2))
     NumericTolerance = property(Double, 0.0).add_attribute(OpenTap.Display("Numeric tolerance", "Allowed absolute difference for numeric values.", "Verification", 3))
     IgnoreCase = property(Boolean, True).add_attribute(OpenTap.Display("Ignore case", "Case-insensitive compare for string values.", "Verification", 4))
 
     def __init__(self):
         super().__init__()
+        self.AvailableKeys = _build_payload_key_choices()
 
     def Run(self):
         super().Run()
