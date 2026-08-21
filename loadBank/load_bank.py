@@ -172,10 +172,32 @@ class LoadBank(Instrument):
         with self._lock:
             self._ensure_connected()
             method = getattr(self._client, method_name)
-            try:
-                response = method(*args, slave=int(slave_id))
-            except TypeError:
-                response = method(*args, unit=int(slave_id))
+
+            response = None
+            last_type_error = None
+
+            # pymodbus uses different slave-id keywords across versions.
+            for keyword in ("slave", "unit", "device_id"):
+                try:
+                    response = method(*args, **{keyword: int(slave_id)})
+                    last_type_error = None
+                    break
+                except TypeError as exc:
+                    last_type_error = exc
+
+            if response is None and last_type_error is not None:
+                try:
+                    # Compatibility fallback for signatures that still accept positional slave id.
+                    response = method(*args, int(slave_id))
+                    last_type_error = None
+                except TypeError as exc:
+                    raise RuntimeError(
+                        "Unsupported pymodbus call signature for {}: {}".format(
+                            method_name,
+                            str(exc),
+                        )
+                    ) from last_type_error
+
             if response is None:
                 raise RuntimeError("No response for Modbus {}".format(method_name))
             if hasattr(response, "isError") and response.isError():
