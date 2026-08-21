@@ -4,9 +4,11 @@ Example of how to make a Result Listener.
 import sys
 import clr
 import math
+import time
 import opentap
 from opentap import *
 import os
+import System
 
 import System.IO
 from System.Text import StringBuilder
@@ -49,6 +51,34 @@ class CsvPythonResultListener(PyResultListener):
                     self.sb.Append(", ")
                 self.sb.Append(str(result.Columns[col].Data.GetValue(row)))
             self.sb.AppendLine("")
+
+    def _candidate_file_names(self, preferred_name):
+        names = [preferred_name]
+        stem, ext = os.path.splitext(preferred_name)
+        extension = ext if ext else ".csv"
+        token = time.strftime("%Y%m%d_%H%M%S")
+        names.append("{0}_{1}{2}".format(stem, token, extension))
+        names.append("{0}_{1}_{2}{3}".format(stem, token, os.getpid(), extension))
+        return names
+
+    def _write_with_fallback(self, preferred_name):
+        contents = self.sb.ToString()
+        last_error = None
+        for candidate in self._candidate_file_names(preferred_name):
+            try:
+                directory = os.path.dirname(candidate)
+                if directory != "" and not os.path.exists(directory):
+                    os.makedirs(directory)
+                System.IO.File.WriteAllText(candidate, contents)
+                if candidate != preferred_name:
+                    self.log.Info("CSV file '{0}' was locked; wrote to '{1}' instead.", preferred_name, candidate)
+                return candidate
+            except System.IO.IOException as exc:
+                last_error = exc
+        if last_error is not None:
+            raise last_error
+        raise RuntimeError("Unable to write CSV results")
+
     def OnTestPlanRunCompleted(self, planRun, logStream):
         """Called by TAP when the test plan completes."""
         try:
@@ -62,11 +92,11 @@ class CsvPythonResultListener(PyResultListener):
                 os.makedirs(directory)
 
             # Then write to the file.
-            System.IO.File.WriteAllText(fileName, self.sb.ToString())
+            written_file = self._write_with_fallback(fileName)
             
             # Publish the csv file as an artifact. This feature is a available from OpenTAP 9.22.0
             if hasattr(planRun, "PublishArtifact"):
-                planRun.PublishArtifact(fileName)
+                planRun.PublishArtifact(written_file)
             
         except Exception as e:
             self.log.Debug(e)

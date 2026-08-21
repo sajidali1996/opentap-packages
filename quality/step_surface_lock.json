@@ -1,0 +1,333 @@
+{
+  "version": "2026-08-21-step1",
+  "description": "Locked editor-facing compatibility surface for custom inverter test plugins.",
+  "resources": [
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_dut.py",
+      "class": "Inverter",
+      "baseType": "Dut",
+      "displayName": "Inverter"
+    },
+    {
+      "plugin": "PQA",
+      "file": "PQA/pqa.py",
+      "class": "PQA",
+      "baseType": "Instrument",
+      "displayName": "PQA"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank.py",
+      "class": "LoadBank",
+      "baseType": "Instrument",
+      "displayName": "loadBank"
+    },
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator.py",
+      "class": "GridSimulator",
+      "baseType": "Instrument",
+      "displayName": "gridSimulator"
+    }
+  ],
+  "steps": [
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "SendControlOn",
+      "displayName": "Control On",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "SendControlOff",
+      "displayName": "Control Off",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "InverterReset",
+      "displayName": "Inverter Reset",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "ClearDspSensorError",
+      "displayName": "Clear DSP Sensor Error",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "BatteryRelayOpen",
+      "displayName": "Battery Relay Open",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "BatteryWakeup",
+      "displayName": "Battery Wakeup",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "BatteryShutdown",
+      "displayName": "Battery Shutdown",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "DefaultMode",
+      "displayName": "Default Mode",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "SetLoadFollowingMode",
+      "displayName": "Set Load Following Mode",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "SendInverterCommand",
+      "displayName": "send Inverter command",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "ApplyMasking",
+      "displayName": "apply masking",
+      "group": "Inverter Automation\\Commands"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "ReadConnectionStatus",
+      "displayName": "Read Connection Status",
+      "group": "Inverter Automation\\Diagnostics"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "ReadPayloadStatus",
+      "displayName": "Read Payload Status",
+      "group": "Inverter Automation\\Diagnostics"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "ReadLatestPayload",
+      "displayName": "Read Latest Payload",
+      "group": "Inverter Automation\\Diagnostics"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "ReadAlerts",
+      "displayName": "Read Alerts",
+      "group": "Inverter Automation\\Diagnostics"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "ReadTrips",
+      "displayName": "Read Trips",
+      "group": "Inverter Automation\\Diagnostics"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "ReadHardwareTrips",
+      "displayName": "Read Hardware Trips",
+      "group": "Inverter Automation\\Diagnostics"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "CheckState",
+      "displayName": "Check State",
+      "group": "Inverter Automation\\Diagnostics"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "VerifyControlOn",
+      "displayName": "Verify Control On",
+      "group": "Inverter Automation\\Verification"
+    },
+    {
+      "plugin": "InverterAutomation",
+      "file": "InverterAutomation/inverter_steps.py",
+      "class": "VerifyPayloadKey",
+      "displayName": "Verify Payload Key",
+      "group": "Inverter Automation\\Verification"
+    },
+
+    {
+      "plugin": "PQA",
+      "file": "PQA/steps.py",
+      "class": "ReadPqaMeasurements",
+      "displayName": "Read PQA Measurements",
+      "group": "PQA"
+    },
+    {
+      "plugin": "PQA",
+      "file": "PQA/compare_pqa_inverter.py",
+      "class": "ComparePqaAndInverter",
+      "displayName": "Compare PQA and Inverter",
+      "group": "PQA"
+    },
+    {
+      "plugin": "PQA",
+      "file": "PQA/numeric_assert.py",
+      "class": "NumericAssert",
+      "displayName": "Numeric Assert",
+      "group": "Assertions"
+    },
+    {
+      "plugin": "PQA",
+      "file": "PQA/store_numeric_value.py",
+      "class": "StoreNumericValue",
+      "displayName": "Store Numeric Value",
+      "group": "Variables"
+    },
+
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankSetRealPower",
+      "displayName": "LoadBank Set Real Power",
+      "group": "Load Bank\\Commands"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankSetReactivePower",
+      "displayName": "LoadBank Set Reactive Power",
+      "group": "Load Bank\\Commands"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankSelectVoltage",
+      "displayName": "LoadBank Select Voltage",
+      "group": "Load Bank\\Commands"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankSetPowerSwitch",
+      "displayName": "LoadBank Set Power Switch",
+      "group": "Load Bank\\Commands"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankSetLoadSwitch",
+      "displayName": "LoadBank Set Load Switch",
+      "group": "Load Bank\\Commands"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankResetLoads",
+      "displayName": "LoadBank Reset Loads",
+      "group": "Load Bank\\Commands"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankReadTemperatures",
+      "displayName": "LoadBank Read Temperatures",
+      "group": "Load Bank\\Diagnostics"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankWriteTemperatureAlarms",
+      "displayName": "LoadBank Write Temperature Alarms",
+      "group": "Load Bank\\Commands"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankReadInductanceAlarm",
+      "displayName": "LoadBank Read Inductance Alarm",
+      "group": "Load Bank\\Diagnostics"
+    },
+    {
+      "plugin": "loadBank",
+      "file": "loadBank/load_bank_steps.py",
+      "class": "LoadBankReadPhaseMeasurements",
+      "displayName": "LoadBank Read Phase Measurements",
+      "group": "Load Bank\\Diagnostics"
+    },
+
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator_steps.py",
+      "class": "GridSimStartOutput",
+      "displayName": "GridSim Start Output",
+      "group": "Grid Simulator\\Commands"
+    },
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator_steps.py",
+      "class": "GridSimStopOutput",
+      "displayName": "GridSim Stop Output",
+      "group": "Grid Simulator\\Commands"
+    },
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator_steps.py",
+      "class": "GridSimStopAlarm",
+      "displayName": "GridSim Stop Alarm",
+      "group": "Grid Simulator\\Commands"
+    },
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator_steps.py",
+      "class": "GridSimSetOutput",
+      "displayName": "GridSim Set Output",
+      "group": "Grid Simulator\\Commands"
+    },
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator_steps.py",
+      "class": "GridSimSetOutputThreePhase",
+      "displayName": "GridSim Set Output 3-Phase",
+      "group": "Grid Simulator\\Commands"
+    },
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator_steps.py",
+      "class": "GridSimReadState",
+      "displayName": "GridSim Read State",
+      "group": "Grid Simulator\\Diagnostics"
+    },
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator_steps.py",
+      "class": "GridSimReadEnvironment",
+      "displayName": "GridSim Read Environment",
+      "group": "Grid Simulator\\Diagnostics"
+    },
+    {
+      "plugin": "gridSimulator",
+      "file": "gridSimulator/grid_simulator_steps.py",
+      "class": "GridSimReadOutput",
+      "displayName": "GridSim Read Output",
+      "group": "Grid Simulator\\Diagnostics"
+    }
+  ]
+}

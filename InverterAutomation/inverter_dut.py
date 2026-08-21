@@ -135,13 +135,24 @@ class Inverter(Dut):
                 else:
                     self.latest_payload = payload
 
+    def _run_safe_control_off_before_close(self):
+        if not bool(self.SafeControlOffOnClose):
+            return
+        if not self.connected or self._websocket is None:
+            return
+        try:
+            self.control_off()
+        except RuntimeError as exc:
+            # If socket state changed during close, suppress this expected race.
+            if "not connected" in str(exc).lower():
+                return
+            log_warning("Safety cleanup control_off failed: {0}", str(exc))
+        except Exception as exc:
+            log_warning("Safety cleanup control_off failed: {0}", str(exc))
+
     def Close(self):
         websocket = self._websocket
-        if websocket is not None and self.SafeControlOffOnClose:
-            try:
-                self.control_off()
-            except Exception as exc:
-                log_warning("Safety cleanup control_off failed: {0}", str(exc))
+        self._run_safe_control_off_before_close()
         self._stop_receiver.set()
         if websocket is not None:
             try:
@@ -256,7 +267,51 @@ class Inverter(Dut):
         self.hwTripsList = self._wait_for_payload_key("hwTripsList")
         return self.hwTripsList
 
+    @staticmethod
+    def _value_indicates_fault(value):
+        if value is None:
+            return False
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, (int, float)):
+            return value != 0
+        if isinstance(value, (list, tuple, set)):
+            return len(value) > 0
+        if isinstance(value, dict):
+            return any(Inverter._value_indicates_fault(item) for item in value.values())
+        if isinstance(value, str):
+            text = value.strip().lower()
+            if text in ("", "[]", "{}", "none", "null", "false", "0"):
+                return False
+            return True
+        return bool(value)
+
     def check_state(self):
-        if self.tripsList in (None, []) and self.hwTripsList in (None, []):
+        payload = self.latest_payload_snapshot()
+        if not isinstance(payload, dict) or not payload:
+            return "NoData"
+
+        trips_present = "tripsList" in payload
+        hw_trips_present = "hwTripsList" in payload
+
+        if trips_present:
+            self.tripsList = payload.get("tripsList")
+        if hw_trips_present:
+            self.hwTripsList = payload.get("hwTripsList")
+
+        if trips_present or hw_trips_present:
+            if self._value_indicates_fault(payload.get("tripsList")):
+                return "Fault"
+            if self._value_indicates_fault(payload.get("hwTripsList")):
+                return "Fault"
             return "Normal"
-        return "Fault"
+
+        fallback_keys = ["sup_trip", "hw_trip"]
+        available_fallbacks = [key for key in fallback_keys if key in payload]
+        if not available_fallbacks:
+            return "NoData"
+
+        for key in available_fallbacks:
+            if self._value_indicates_fault(payload.get(key)):
+                return "Fault"
+        return "Normal"

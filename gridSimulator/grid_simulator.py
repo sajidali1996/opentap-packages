@@ -157,14 +157,26 @@ class GridSimulator(Instrument):
         model = frame.payload.decode("ascii", errors="ignore").strip("\x00 ").strip()
         return model if model else "UNKNOWN"
 
-    def start_output(self):
-        self._transaction(self.CLASS_CONTROL, self.WORD_AC_START)
+    def start_output(self, allow_already_running=True):
+        return self._run_idempotent_control(
+            self.WORD_AC_START,
+            bool(allow_already_running),
+            "AC start returned state error code 4; output may already be running.",
+        )
 
-    def stop_output(self):
-        self._transaction(self.CLASS_CONTROL, self.WORD_AC_STOP)
+    def stop_output(self, allow_already_stopped=True):
+        return self._run_idempotent_control(
+            self.WORD_AC_STOP,
+            bool(allow_already_stopped),
+            "AC stop returned state error code 4; output may already be stopped.",
+        )
 
-    def stop_alarm(self):
-        self._transaction(self.CLASS_CONTROL, self.WORD_STOP_ALARM)
+    def stop_alarm(self, allow_no_active_alarm=True):
+        return self._run_idempotent_control(
+            self.WORD_STOP_ALARM,
+            bool(allow_no_active_alarm),
+            "Stop alarm returned state error code 4; no active alarm to clear.",
+        )
 
     def regulate_output(self, voltage_v, frequency_hz, wave_code=0, start_if_needed=True):
         payload = self._build_online_regulation_payload(
@@ -193,9 +205,19 @@ class GridSimulator(Instrument):
             self._transaction(self.CLASS_SET, self.WORD_ONLINE_REGULATION, payload)
         except RuntimeError as exc:
             if start_if_needed and self._is_state_error(exc):
-                self.start_output()
+                self.start_output(allow_already_running=True)
                 self._transaction(self.CLASS_SET, self.WORD_ONLINE_REGULATION, payload)
                 return
+            raise
+
+    def _run_idempotent_control(self, command_word, allow_noop_on_state_error, noop_message):
+        try:
+            self._transaction(self.CLASS_CONTROL, int(command_word))
+            return True
+        except RuntimeError as exc:
+            if bool(allow_noop_on_state_error) and self._is_state_error(exc):
+                self.log.Info(str(noop_message))
+                return False
             raise
 
     @staticmethod
@@ -381,7 +403,9 @@ class GridSimulator(Instrument):
         if len(value) != 3:
             raise RuntimeError("Invalid signed-24 value length")
         raw = int.from_bytes(value, "big", signed=False)
-        return -(raw & 0x7FFFFF) if (raw & 0x800000) else raw
+        # Hardware responses encode active power as sign bit + 23-bit magnitude.
+        magnitude = raw & 0x7FFFFF
+        return -magnitude if (raw & 0x800000) else magnitude
 
     def _build_online_regulation_payload(self, voltages, frequencies, wave_codes):
         if not (len(voltages) == len(frequencies) == len(wave_codes) == 3):
